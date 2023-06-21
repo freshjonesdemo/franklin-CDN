@@ -1,0 +1,16 @@
+{
+  "project": "project_name",
+  "host": "your_project_host",
+  "plugins": [
+    {
+      "id": "publish",
+      "title": "Publish",
+      "excludePaths": [
+        "/**"
+      ],
+      "includePaths": [
+        "/**/drafts/**"
+      ]
+    }
+  ]
+}
