@@ -166,13 +166,13 @@ async function previewMode(sk) {
   const plugins = sk.shadowRoot.querySelector('.plugin-container');
   let div = plugins.querySelector('.plugin.move-to-review');
   if (!div) {
-    div = document.createElement('div');
-    div.className = 'plugin move-to-review';
-    const button = document.createElement('button');
-    button.textContent = 'Loading Review Status...';
-    loading(button, true);
-    div.append(button);
-    plugins.append(div);
+    // div = document.createElement('div');
+    // div.className = 'plugin move-to-review';
+    // const button = document.createElement('button');
+    // button.textContent = 'Loading Review Status...';
+    // loading(button, true);
+    // div.append(button);
+    // plugins.append(div);
 
     const bug = document.createElement('div');
     bug.innerHTML = '<div style="background:magenta; color: white; font-size:18px; line-height:18px; display:inline;">SIDEKICK BUG</div'
