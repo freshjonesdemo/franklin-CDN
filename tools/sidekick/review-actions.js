@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
-import { getMetadata } from `${window.location.origin}/scripts/lib-franklin.js`;
+// import { getMetadata } from `${window.location.origin}/scripts/lib-franklin.js`;
+const getMetadata = require(`${window.location.origin}/scripts/lib-franklin.js`);
 
 export const SidekickState = {};
 
