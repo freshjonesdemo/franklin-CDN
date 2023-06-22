@@ -370,9 +370,9 @@ async function decorateSidekick(sk) {
   link.href = '/tools/sidekick/review.css';
 
   sk.shadowRoot.append(link);
-
-  if (state === 'page') previewMode(sk);
-  if (state === 'reviews') reviewMode(features, sk);
+  previewMode(sk);
+  // if (state === 'page') previewMode(sk);
+  // if (state === 'reviews') reviewMode(features, sk);
   addReviewToEnvSelector(sk.shadowRoot);
 }
 
