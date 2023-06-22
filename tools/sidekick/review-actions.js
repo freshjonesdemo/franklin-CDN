@@ -84,116 +84,116 @@ export async function getReviews() {
 }
 
 async function getReview(reviewId) {
-  const reviews = await getReviews();
-  return reviews.find((e) => e.reviewId === reviewId);
+  // const reviews = await getReviews();
+  // return reviews.find((e) => e.reviewId === reviewId);
 }
 
 async function isReviewOpen(reviewId) {
-  const { status } = await getReview(reviewId);
-  console.log(`${reviewId} status: ${status}`);
-  return (status === 'open');
+  // const { status } = await getReview(reviewId);
+  // console.log(`${reviewId} status: ${status}`);
+  // return (status === 'open');
 }
 
 async function publishPageFromSnapshot(pathname, reviewId, env) {
-  const snapshotEndpoint = `https://admin.hlx.page/snapshot/${env.owner}/${env.repo}/main/${reviewId}${pathname}?publish=true`;
-  console.log(snapshotEndpoint);
-  const snapshotResp = await fetch(snapshotEndpoint, {
-    method: 'POST',
-  });
-  const snapshotText = await snapshotResp.text();
-  console.log(snapshotText);
+  // const snapshotEndpoint = `https://admin.hlx.page/snapshot/${env.owner}/${env.repo}/main/${reviewId}${pathname}?publish=true`;
+  // console.log(snapshotEndpoint);
+  // const snapshotResp = await fetch(snapshotEndpoint, {
+  //   method: 'POST',
+  // });
+  // const snapshotText = await snapshotResp.text();
+  // console.log(snapshotText);
 }
 
 async function addPageToSnapshot(pathname, reviewId, env) {
-  const snapshotEndpoint = `https://admin.hlx.page/snapshot/${env.owner}/${env.repo}/main/${reviewId}${pathname}`;
-  console.log(snapshotEndpoint);
-  const snapshotResp = await fetch(snapshotEndpoint, {
-    method: 'POST',
-  });
-  const snapshotText = await snapshotResp.text();
-  console.log(snapshotText);
+  // const snapshotEndpoint = `https://admin.hlx.page/snapshot/${env.owner}/${env.repo}/main/${reviewId}${pathname}`;
+  // console.log(snapshotEndpoint);
+  // const snapshotResp = await fetch(snapshotEndpoint, {
+  //   method: 'POST',
+  // });
+  // const snapshotText = await snapshotResp.text();
+  // console.log(snapshotText);
 }
 
 export async function addPageToReview(page, reviewId) {
-  const env = getReviewEnv();
-  console.log(`Add ${page} to ${reviewId}`);
-  console.log(env);
-  if (isReviewOpen(reviewId)) {
-    console.log('Adding to snapshot');
-    const [pathname] = page.split('?');
-    addPageToSnapshot(pathname, reviewId, env);
-    const endpoint = getEndpoint(reviewId, 'add-page');
-    const resp = await fetch(`${endpoint}?page=${encodeURIComponent(page)}`, {
-      method: 'POST',
-    });
-    const text = await resp.text();
-    console.log(text);
-  } else {
-    console.log('Review is not open');
-  }
+  // const env = getReviewEnv();
+  // console.log(`Add ${page} to ${reviewId}`);
+  // console.log(env);
+  // if (isReviewOpen(reviewId)) {
+  //   console.log('Adding to snapshot');
+  //   const [pathname] = page.split('?');
+  //   addPageToSnapshot(pathname, reviewId, env);
+  //   const endpoint = getEndpoint(reviewId, 'add-page');
+  //   const resp = await fetch(`${endpoint}?page=${encodeURIComponent(page)}`, {
+  //     method: 'POST',
+  //   });
+  //   const text = await resp.text();
+  //   console.log(text);
+  // } else {
+  //   console.log('Review is not open');
+  // }
 }
 
 export async function removePageFromReview(page, reviewId) {
-  const env = getReviewEnv();
-  console.log(`Remove ${page} from ${reviewId}`);
-  console.log(env);
-  if (isReviewOpen(reviewId)) {
-    console.log('Removing from snapshot');
-    const [pathname] = page.split('?');
-    const snapshotEndpoint = `https://admin.hlx.page/snapshot/${env.owner}/${env.repo}/main/${reviewId}${pathname}`;
-    console.log(snapshotEndpoint);
-    const snapshotResp = await fetch(snapshotEndpoint, {
-      method: 'DELETE',
-    });
-    const snapshotText = await snapshotResp.text();
-    console.log(snapshotText);
+  // const env = getReviewEnv();
+  // console.log(`Remove ${page} from ${reviewId}`);
+  // console.log(env);
+  // if (isReviewOpen(reviewId)) {
+  //   console.log('Removing from snapshot');
+  //   const [pathname] = page.split('?');
+  //   const snapshotEndpoint = `https://admin.hlx.page/snapshot/${env.owner}/${env.repo}/main/${reviewId}${pathname}`;
+  //   console.log(snapshotEndpoint);
+  //   const snapshotResp = await fetch(snapshotEndpoint, {
+  //     method: 'DELETE',
+  //   });
+  //   const snapshotText = await snapshotResp.text();
+  //   console.log(snapshotText);
 
-    const endpoint = getEndpoint(reviewId, 'remove-page');
-    const resp = await fetch(`${endpoint}?page=${encodeURIComponent(pathname)}`, {
-      method: 'POST',
-    });
-    const text = await resp.text();
-    console.log(text);
-  } else {
-    console.log('Review is not open');
-  }
+  //   const endpoint = getEndpoint(reviewId, 'remove-page');
+  //   const resp = await fetch(`${endpoint}?page=${encodeURIComponent(pathname)}`, {
+  //     method: 'POST',
+  //   });
+  //   const text = await resp.text();
+  //   console.log(text);
+  // } else {
+  //   console.log('Review is not open');
+  // }
 }
 
 export async function updateReview(pages, reviewId) {
-  const env = getReviewEnv();
-  console.log(`Update Review ${reviewId} with ${pages.length} pages`);
-  console.log(pages);
-  console.log(env);
+  // const env = getReviewEnv();
+  // console.log(`Update Review ${reviewId} with ${pages.length} pages`);
+  // console.log(pages);
+  // console.log(env);
 
-  if (isReviewOpen(reviewId)) {
-    console.log('Clearing Pages');
-    const snapshotEndpoint = `https://admin.hlx.page/snapshot/${env.owner}/${env.repo}/main/${reviewId}/*`;
-    console.log(snapshotEndpoint);
-    const snapshotResp = await fetch(snapshotEndpoint, {
-      method: 'DELETE',
-    });
-    const snapshotText = await snapshotResp.text();
-    console.log(snapshotText);
+  // if (isReviewOpen(reviewId)) {
+  //   console.log('Clearing Pages');
+  //   const snapshotEndpoint = `https://admin.hlx.page/snapshot/${env.owner}/${env.repo}/main/${reviewId}/*`;
+  //   console.log(snapshotEndpoint);
+  //   const snapshotResp = await fetch(snapshotEndpoint, {
+  //     method: 'DELETE',
+  //   });
+  //   const snapshotText = await snapshotResp.text();
+  //   console.log(snapshotText);
 
-    const pathnames = pages.map((page) => page.split('?')[0]);
-    console.log(pathnames);
-    for (let i = 0; i < pathnames.length; i += 1) {
-      const pathname = pathnames[i];
-      console.log('Adding to snapshot');
-      console.log(pathname);
-      // eslint-disable-next-line no-await-in-loop
-      await addPageToSnapshot(pathname, reviewId, env);
-    }
+  //   const pathnames = pages.map((page) => page.split('?')[0]);
+  //   console.log(pathnames);
+  //   for (let i = 0; i < pathnames.length; i += 1) {
+  //     const pathname = pathnames[i];
+  //     console.log('Adding to snapshot');
+  //     console.log(pathname);
+  //     // eslint-disable-next-line no-await-in-loop
+  //     await addPageToSnapshot(pathname, reviewId, env);
+  //   }
 
-    const endpoint = getEndpoint(reviewId, '');
-    const resp = await fetch(`${endpoint}?pages=${pages.join()}`, {
-      method: 'POST',
-    });
-    const text = await resp.text();
-    console.log(text);
-  } else {
-    console.log('Review is not open');
-  }
+  //   const endpoint = getEndpoint(reviewId, '');
+  //   const resp = await fetch(`${endpoint}?pages=${pages.join()}`, {
+  //     method: 'POST',
+  //   });
+  //   const text = await resp.text();
+  //   console.log(text);
+  // } else {
+  //   console.log('Review is not open');
+  // }
 }
 
 export async function submitForReview(reviewId) {
