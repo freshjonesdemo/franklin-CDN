@@ -12,155 +12,155 @@ import {
 } from './review-actions.js';
 
 function loading(button, isLoading) {
-  if (isLoading) {
-    button.classList.add('loading');
-    button.disabled = true;
-  } else {
-    button.disabled = false;
-    button.classList.remove('loading');
-  }
+  // if (isLoading) {
+  //   button.classList.add('loading');
+  //   button.disabled = true;
+  // } else {
+  //   button.disabled = false;
+  //   button.classList.remove('loading');
+  // }
 }
 
 async function getReviewStatus() {
-  const reviews = await getReviews();
-  if (reviews.length === 1 && reviews[0].reviewId === 'default') return reviews[0].status;
-  return ('open');
+  // const reviews = await getReviews();
+  // if (reviews.length === 1 && reviews[0].reviewId === 'default') return reviews[0].status;
+  // return ('open');
 }
 
 async function getPageReview() {
-  const reviews = await getReviews();
-  console.log(reviews);
-  const review = reviews.find((r) => r.pages.find((p) => p.split('?')[0] === window.location.pathname));
-  return review;
+  // const reviews = await getReviews();
+  // console.log(reviews);
+  // const review = reviews.find((r) => r.pages.find((p) => p.split('?')[0] === window.location.pathname));
+  // return review;
 }
 
 async function getPageStatus() {
-  const review = await getPageReview();
-  if (review) return review.status;
-  return '';
+  // const review = await getPageReview();
+  // if (review) return review.status;
+  // return '';
 }
 
 async function getOpenReviews() {
-  const reviews = await getReviews();
-  return reviews.filter((r) => r.status === 'open');
+  // const reviews = await getReviews();
+  // return reviews.filter((r) => r.status === 'open');
 }
 
 function getPageParams() {
-  const params = new URLSearchParams();
-  document.querySelectorAll('form[data-config-token]').forEach((e) => {
-    params.append('form', e.dataset.configToken);
-  });
-  const search = params.toString();
-  if (search) return (`?${search}`);
-  return '';
+  // const params = new URLSearchParams();
+  // document.querySelectorAll('form[data-config-token]').forEach((e) => {
+  //   params.append('form', e.dataset.configToken);
+  // });
+  // const search = params.toString();
+  // if (search) return (`?${search}`);
+  // return '';
 }
 
 async function addReviewToEnvSelector(shadowRoot) {
-  const env = getReviewEnv();
-  const reviews = await getReviews();
-  const fc = shadowRoot.querySelector('.feature-container');
-  const envSwitcher = fc.querySelector('.env');
-  const dc = fc.querySelector('.env .dropdown-container');
+  // const env = getReviewEnv();
+  // const reviews = await getReviews();
+  // const fc = shadowRoot.querySelector('.feature-container');
+  // const envSwitcher = fc.querySelector('.env');
+  // const dc = fc.querySelector('.env .dropdown-container');
 
-  const createButton = (text) => {
-    const button = document.createElement('button');
-    button.title = text;
-    button.tabindex = '0';
-    button.textContent = text;
-    button.addEventListener('click', () => {
-      if (text === 'Development') {
-        window.location.href = `http://localhost:3000${window.location.pathname}`;
-      } else if (text === 'Preview') {
-        window.location.href = getEnvURL(env, window.location.pathname, { state: 'page' });
-      } else if (text === 'Review') {
-        window.location.href = getEnvURL(env, window.location.pathname, { state: 'reviews', review: reviews.length > 0 ? reviews[0].reviewId : null });
-      } else if (text === 'Live') {
-        window.location.href = getEnvURL(env, window.location.pathname, { state: 'live' });
-      } else if (text === 'Production') {
-        const canonical = button.getAttribute('data-canonical');
-        window.location.href = canonical;
-      } else if (text === 'Content Drive') {
-        const { folders } = SidekickState.status.edit;
-        const drive = folders[folders.length - 1].url;
-        window.location.href = drive;
-      }
-    });
-    return (button);
-  };
+  // const createButton = (text) => {
+  //   const button = document.createElement('button');
+  //   button.title = text;
+  //   button.tabindex = '0';
+  //   button.textContent = text;
+  //   button.addEventListener('click', () => {
+  //     if (text === 'Development') {
+  //       window.location.href = `http://localhost:3000${window.location.pathname}`;
+  //     } else if (text === 'Preview') {
+  //       window.location.href = getEnvURL(env, window.location.pathname, { state: 'page' });
+  //     } else if (text === 'Review') {
+  //       window.location.href = getEnvURL(env, window.location.pathname, { state: 'reviews', review: reviews.length > 0 ? reviews[0].reviewId : null });
+  //     } else if (text === 'Live') {
+  //       window.location.href = getEnvURL(env, window.location.pathname, { state: 'live' });
+  //     } else if (text === 'Production') {
+  //       const canonical = button.getAttribute('data-canonical');
+  //       window.location.href = canonical;
+  //     } else if (text === 'Content Drive') {
+  //       const { folders } = SidekickState.status.edit;
+  //       const drive = folders[folders.length - 1].url;
+  //       window.location.href = drive;
+  //     }
+  //   });
+  //   return (button);
+  // };
 
-  if (fc.querySelector('.env.hlx-sk-hidden')) {
-    envSwitcher.classList.remove('hlx-sk-hidden');
-    const toggle = fc.querySelector('.env .dropdown-toggle');
-    if (env.state === 'reviews') {
-      toggle.textContent = 'Review';
-    }
-    const states = ['Development', 'Preview', 'Live', 'Production'];
-    dc.textContent = '';
-    states.forEach((state) => {
-      let advancedOnly = false;
-      let disabled = false;
-      // special handling for reviews state
-      if (state.toLowerCase() === 'review') {
-        // disable review button
-        disabled = true;
-      }
-      if (state.toLowerCase() === 'development') {
-        // todo for production: check if sidekick config contains host
-        advancedOnly = true;
-      }
+  // if (fc.querySelector('.env.hlx-sk-hidden')) {
+  //   envSwitcher.classList.remove('hlx-sk-hidden');
+  //   const toggle = fc.querySelector('.env .dropdown-toggle');
+  //   if (env.state === 'reviews') {
+  //     toggle.textContent = 'Review';
+  //   }
+  //   const states = ['Development', 'Preview', 'Live', 'Production'];
+  //   dc.textContent = '';
+  //   states.forEach((state) => {
+  //     let advancedOnly = false;
+  //     let disabled = false;
+  //     // special handling for reviews state
+  //     if (state.toLowerCase() === 'review') {
+  //       // disable review button
+  //       disabled = true;
+  //     }
+  //     if (state.toLowerCase() === 'development') {
+  //       // todo for production: check if sidekick config contains host
+  //       advancedOnly = true;
+  //     }
 
-      const className = `plugin ${state.toLowerCase()}`;
-      let pluginDiv = dc.querySelector(className);
-      if (!pluginDiv) {
-        pluginDiv = document.createElement('div');
-        pluginDiv.className = className;
-        pluginDiv.append(createButton(state));
-        dc.append(pluginDiv);
-      }
-      if (advancedOnly) {
-        pluginDiv.classList.add('hlx-sk-advanced-only');
-      } else {
-        pluginDiv.classList.remove('hlx-sk-advanced-only');
-      }
-      const button = pluginDiv.querySelector('button');
-      if (state.toLowerCase() === 'production') {
-        const canonical = document.querySelector('link[rel="canonical"]');
-        if (canonical && canonical.href) {
-          button.setAttribute('data-canonical', canonical.href);
-        } else {
-          disabled = true;
-        }
-      }
+  //     const className = `plugin ${state.toLowerCase()}`;
+  //     let pluginDiv = dc.querySelector(className);
+  //     if (!pluginDiv) {
+  //       pluginDiv = document.createElement('div');
+  //       pluginDiv.className = className;
+  //       pluginDiv.append(createButton(state));
+  //       dc.append(pluginDiv);
+  //     }
+  //     if (advancedOnly) {
+  //       pluginDiv.classList.add('hlx-sk-advanced-only');
+  //     } else {
+  //       pluginDiv.classList.remove('hlx-sk-advanced-only');
+  //     }
+  //     const button = pluginDiv.querySelector('button');
+  //     if (state.toLowerCase() === 'production') {
+  //       const canonical = document.querySelector('link[rel="canonical"]');
+  //       if (canonical && canonical.href) {
+  //         button.setAttribute('data-canonical', canonical.href);
+  //       } else {
+  //         disabled = true;
+  //       }
+  //     }
 
-      button.disabled = disabled;
-    });
-  }
+  //     button.disabled = disabled;
+  //   });
+  // }
   // review button
-  if (!dc.querySelector('.review') && reviews.length > 0 && env.state !== 'reviews') {
-    const reviewDiv = document.createElement('div');
-    const live = dc.querySelector('.live');
-    live.before(reviewDiv);
-    reviewDiv.className = 'review plugin';
-    reviewDiv.append(createButton('Review'));
-  }
+  // if (!dc.querySelector('.review') && reviews.length > 0 && env.state !== 'reviews') {
+  //   const reviewDiv = document.createElement('div');
+  //   const live = dc.querySelector('.live');
+  //   live.before(reviewDiv);
+  //   reviewDiv.className = 'review plugin';
+  //   reviewDiv.append(createButton('Review'));
+  // }
 
   // remove confusing current env button
-  const pressed = dc.querySelector('button.pressed');
-  if (pressed) {
-    pressed.remove();
-  }
+  // const pressed = dc.querySelector('button.pressed');
+  // if (pressed) {
+  //   pressed.remove();
+  // }
 
-  // add Content Drive link
-  const drive = dc.querySelector('.drive');
-  if (!drive && SidekickState?.status?.edit) {
-    const driveDiv = document.createElement('div');
-    dc.append(driveDiv);
-    driveDiv.className = 'drive plugin';
-    driveDiv.append(createButton('Content Drive'));
-  } else if (drive && !SidekickState?.status?.edit) {
-    drive.remove();
-  }
-}
+//   // add Content Drive link
+//   const drive = dc.querySelector('.drive');
+//   if (!drive && SidekickState?.status?.edit) {
+//     const driveDiv = document.createElement('div');
+//     dc.append(driveDiv);
+//     driveDiv.className = 'drive plugin';
+//     driveDiv.append(createButton('Content Drive'));
+//   } else if (drive && !SidekickState?.status?.edit) {
+//     drive.remove();
+//   }
+// }
 
 async function previewMode(sk) {
   const plugins = sk.shadowRoot.querySelector('.plugin-container');
@@ -178,60 +178,60 @@ async function previewMode(sk) {
     bug.innerHTML = '<div style="background:magenta; color: white; font-size:18px; line-height:18px; display:inline;">SIDEKICK BUG</div'
     plugins.append(bug);
   }
-  const button = div.querySelector('button');
+  // const button = div.querySelector('button');
 
-  const setReviewStatus = (pageStatus, reviewStatus) => {
-    loading(button, false);
-    const authorized = SidekickState.status.status !== 401;
-    let statusText;
+  // const setReviewStatus = (pageStatus, reviewStatus) => {
+  //   loading(button, false);
+  //   const authorized = SidekickState.status.status !== 401;
+  //   let statusText;
 
-    if (reviewStatus === 'submitted') {
-      button.classList.add('submitted');
-      button.disabled = true;
-      if (pageStatus === 'submitted') {
-        statusText = 'Submitted for Review';
-      } else {
-        statusText = 'Review locked';
-      }
-    } else if (pageStatus === 'open') {
-      statusText = 'Update in Review';
-      button.classList.add('ready');
-      button.disabled = !authorized;
-    } else if (pageStatus === '') {
-      statusText = 'Move to Review';
-      button.disabled = !authorized;
-    }
+  //   if (reviewStatus === 'submitted') {
+  //     button.classList.add('submitted');
+  //     button.disabled = true;
+  //     if (pageStatus === 'submitted') {
+  //       statusText = 'Submitted for Review';
+  //     } else {
+  //       statusText = 'Review locked';
+  //     }
+  //   } else if (pageStatus === 'open') {
+  //     statusText = 'Update in Review';
+  //     button.classList.add('ready');
+  //     button.disabled = !authorized;
+  //   } else if (pageStatus === '') {
+  //     statusText = 'Move to Review';
+  //     button.disabled = !authorized;
+  //   }
 
-    button.innerHTML = `${statusText}`;
+  //   button.innerHTML = `${statusText}`;
   };
 
-  const updateReviewStatus = async () => {
-    const pageStatus = await getPageStatus();
-    const reviewStatus = await getReviewStatus();
+  // const updateReviewStatus = async () => {
+  //   const pageStatus = await getPageStatus();
+  //   const reviewStatus = await getReviewStatus();
 
-    setReviewStatus(pageStatus, reviewStatus);
+  //   setReviewStatus(pageStatus, reviewStatus);
 
-    return { pageStatus, reviewStatus };
-  };
+  //   return { pageStatus, reviewStatus };
+  // };
 
-  try {
-    let { pageStatus } = await updateReviewStatus();
+  // try {
+  //   let { pageStatus } = await updateReviewStatus();
 
-    button.addEventListener('click', async () => {
-      loading(button, true);
-      const openReviews = await getOpenReviews();
-      if (openReviews.length === 1 && (pageStatus === '' || pageStatus === 'open')) {
-        const search = getPageParams();
-        await addPageToReview(window.location.pathname + search, openReviews[0].reviewId);
-        pageStatus = (await updateReviewStatus()).pageStatus;
-      }
-      loading(button, false);
-    });
-  } catch (e) {
-    button.setAttribute('disabled', '');
-    button.title = 'Failed to Connect to Review Service';
-    button.textContent = '(Network Error)';
-  }
+  //   button.addEventListener('click', async () => {
+  //     loading(button, true);
+  //     const openReviews = await getOpenReviews();
+  //     if (openReviews.length === 1 && (pageStatus === '' || pageStatus === 'open')) {
+  //       const search = getPageParams();
+  //       await addPageToReview(window.location.pathname + search, openReviews[0].reviewId);
+  //       pageStatus = (await updateReviewStatus()).pageStatus;
+  //     }
+  //     loading(button, false);
+  //   });
+  // } catch (e) {
+  //   button.setAttribute('disabled', '');
+  //   button.title = 'Failed to Connect to Review Service';
+  //   button.textContent = '(Network Error)';
+  // }
 }
 
 let dialogIsOpened = false;
