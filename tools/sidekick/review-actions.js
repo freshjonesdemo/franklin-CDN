@@ -67,20 +67,20 @@ function getEndpoint(reviewId, verb) {
 }
 
 export async function getReviews() {
-  const env = getReviewEnv();
-  let adminURL = getEnvURL(env, `/admin/?ck=${Math.random()}`, { state: 'reviews' });
-  if (!env.review) {
-    adminURL = adminURL.replace('default--', '');
-  }
-  const resp = await fetch(adminURL, {
-    cache: 'no-store',
-  });
-  const json = await resp.json();
-  const reviews = json.data;
-  reviews.forEach((review) => {
-    review.pages = review.pages ? review.pages.split(',').map((p) => p.trim()) : [];
-  });
-  return (reviews);
+  // const env = getReviewEnv();
+  // let adminURL = getEnvURL(env, `/admin/?ck=${Math.random()}`, { state: 'reviews' });
+  // if (!env.review) {
+  //   adminURL = adminURL.replace('default--', '');
+  // }
+  // const resp = await fetch(adminURL, {
+  //   cache: 'no-store',
+  // });
+  // const json = await resp.json();
+  // const reviews = json.data;
+  // reviews.forEach((review) => {
+  //   review.pages = review.pages ? review.pages.split(',').map((p) => p.trim()) : [];
+  // });
+  // return (reviews);
 }
 
 async function getReview(reviewId) {
