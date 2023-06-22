@@ -173,6 +173,10 @@ async function previewMode(sk) {
     loading(button, true);
     div.append(button);
     plugins.append(div);
+
+    const bug = document.createElement('div');
+    bug.innerHTML = '<div style="background:magenta; color: white; font-size:18px; line-height:18px; display:inline;">SIDEKICK BUG</div'
+    plugins.append(bug);
   }
   const button = div.querySelector('button');
 
